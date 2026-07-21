@@ -1,0 +1,391 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{TLCresume}[2026/05/20 Resume Package]
+% Author: Timmy Chan
+
+% =========================================================
+% FONTS & ENCODING
+% =========================================================
+\RequirePackage[T1]{fontenc}
+\RequirePackage{anyfontsize}
+\RequirePackage{csquotes}
+
+% =========================================================
+% COLORS & BACKGROUND
+% =========================================================
+\RequirePackage{xcolor}
+\RequirePackage{pagecolor}
+
+% Primary Accent Color
+\definecolor{highlight}{RGB}{26,71,122}
+
+% Background Color (Soft Warm Cream Off-White)
+\definecolor{paperbg}{RGB}{252, 252, 250}
+\pagecolor{paperbg}
+
+% =========================================================
+% MARGINS & ALIGNMENT
+% =========================================================
+\RequirePackage[margin=.65in, top=.25in, bottom=.65in]{geometry}
+\raggedright % Left align text
+\raggedbottom % Prevent stretching vertical white space
+
+% =========================================================
+% HYPERLINKS
+% =========================================================
+\RequirePackage[pdfpagelabels=false, hypertexnames=false]{hyperref}
+\hypersetup{
+	colorlinks=true,
+	urlcolor=highlight
+}
+
+% =========================================================
+% BULLET POINTS & LISTS (FIXED FOR PAGE BREAKS)
+% =========================================================
+\RequirePackage{enumitem}
+\setlength{\tabcolsep}{0in}
+
+% Clean, page-breakable itemize environment
+\newenvironment{zitemize}{%
+	\begin{itemize}[
+		leftmargin=1.2em,
+		itemsep=1pt,
+		parsep=0pt,
+		topsep=2pt,
+		partopsep=0pt
+		]%
+	}{%
+	\end{itemize}%
+}
+
+% =========================================================
+% SECTION FORMATTING
+% =========================================================
+\RequirePackage[nostruts]{titlesec}
+\titlespacing*{\section}{0em}{0.5em}{0.2em}
+
+\titleformat{\section}
+{\Large\bfseries\color{highlight}}
+{}{0em}{}
+[\vspace{0.1em}\hrule]
+
+\titlespacing*{\subsection}{0em}{0em}{0em}
+\titleformat{\subsection}{\bfseries}{}{0em}{}[]
+
+% =========================================================
+% HELPER MACROS
+% =========================================================
+\newcommand{\skills}[1]{{\bfseries #1}}
+\newcommand{\subtext}[1]{\textit{#1}\par\vspace{-0.2em}}
+
+\pagenumbering{gobble} % Disable page numbers
+
+\RequirePackage{standalone}
+\RequirePackage[english]{babel}
+
+% =========================================================
+% RESUME MACROS
+% =========================================================
+
+% Subheading Macro (Single line for #2 School/Company & #4 Location)
+\newcommand{\resumeSubheading}[4]{%
+	\vspace{0.3em}%
+	{\fontsize{11.2}{12}\selectfont\bfseries #1}\hfill{\small\textbf{#3}}\\%
+	\if\relax\detokenize{#2}\relax\else\textit{#2}\fi%
+	\if\relax\detokenize{#4}\relax\else\hfill\textit{#4}\fi%
+	\par\vspace{0.2em}%
+}
+
+% Resume Item List wrappers
+\newcommand{\resumeItemListStart}{\begin{zitemize}}
+	\newcommand{\resumeItemListEnd}{\end{zitemize}}
+\newcommand{\resumeItem}[1]{\item #1}
+
+% Project Heading Macro
+\newcommand{\resumeProjectHeading}[2]{%
+	\vspace{0.3em}%
+	\textbf{#1}\hfill{\small #2}\par%
+	\vspace{0.15em}%
+}
+
+% Technologies Macro
+\newcommand{\technologies}[1]{%
+	\vspace{0.1em}%
+	{\small\textbf{Technologies: }#1}\par%
+	\vspace{0.15em}%
+}
+
+% Spacing Macros
+\newcommand{\resumespace}{\vspace{0.4em}}
+\newcommand{\resumelittlespace}{\vspace{0.2em}}
+
+\newcommand{\skill}[2]{%
+	\textbf{#1}\par
+	#2\par
+	\vspace{0.2em}%
+}
+
+%\NeedsTeXFormat{LaTeX2e}
+%\ProvidesPackage{TLCresume}[11/19/21 resume package]
+%% Author: Timmy Chan
+%
+%% Assuming using "article" document class and letter sized paper.
+%% FONT STUFF
+%
+%%\RequirePackage[T1]{fontenc} %  Font encoding https://texfaq.org/FAQ-why-inp-font
+%%\RequirePackage[default,semibold]{sourcesans}
+%%\RequirePackage[10pt]{moresize}
+%\usepackage{anyfontsize}
+%\RequirePackage{csquotes}
+%\RequirePackage{xcolor}
+%\RequirePackage{pagecolor} % Allows setting page background colors
+%%\RequirePackage{enumitem}
+%%% Reduces padding above/below bullet lists and between items
+%%\setlist{noitemsep, topsep=1pt, parsep=0pt, partopsep=0pt}
+%
+%
+%% Define a custom soft off-white color (RGB: 0-255)
+%\definecolor{paperbg}{RGB}{252, 252, 250}
+%\pagecolor{paperbg}
+%
+%% MARGINS AND SPACING
+%%\usepackage{geometry}
+%%\geometry{
+%%	left=0.65in,
+%%	right=0.65in,
+%%	top=0.60in,
+%%	bottom=0.60in
+%%}
+%
+%\RequirePackage[margin=.5in, top=.25in, bottom=.35in]{geometry} % Changed bottom from 1in to .5in
+%%\RequirePackage[margin=.5in, top=.5in, bottom=1in]{geometry} % Set Margins
+%\raggedright % left align no indent
+%\raggedbottom % top align no indent
+%
+%% COLOR
+%\RequirePackage{xcolor}
+%%\definecolor{highlight}{RGB}{61, 90, 128} % CHANGE THIS TO YOUR FAV COLOR https://g.co/kgs/aoqdi7
+%\definecolor{highlight}{RGB}{26,71,122}
+%
+%% LINKS
+%%\RequirePackage{hyperref}
+%%\hypersetup{colorlinks=true,urlcolor=highlight}
+%% --- Update hyperref options ---
+%\RequirePackage[pdfpagelabels=false, hypertexnames=false]{hyperref}
+%\hypersetup{
+%	colorlinks=true,
+%	urlcolor=highlight
+%}
+%
+%
+%% BULLET POINTS
+%\RequirePackage[inline]{enumitem}
+%\setlength{\tabcolsep}{0in}
+%
+%% SECTION FORMATTING 
+%\RequirePackage[nostruts]{titlesec}
+%\titlespacing*{\section}{0em}{0.5em}{0em}
+%
+%%=== TITLES FORMATTING===========
+%\titleformat{\section}
+%{\Large\bfseries\color{highlight}}
+%{}{0em}{}
+%[\vspace{0.1em}\hrule]
+%
+%
+%% SUBSECTION FORMATTING
+%\titlespacing*{\subsection}{0em}{0em}{0em}
+%\titleformat{\subsection}{\bfseries}{}{0em}{}[]
+%
+%% BOLD COMMAND
+%\newcommand{\skills}[1]{ {
+%		\bfseries #1
+%	}}
+%
+%% SUBTEXT
+%\newcommand{\subtext}[1]{\textit{#1}\par\vspace{-.5em}}
+%
+%% tighter spacing than itemize
+%\setlist[itemize]{align=parleft,left=0pt..1em}
+%\newenvironment{zitemize}{
+%\begin{itemize} \itemsep 0pt \parskip 0pt \parsep 1pt}
+%{\end{itemize}\vspace{-.5em}}
+%
+%% NO PAGE NUMBER
+%\pagenumbering{gobble}
+%
+%% SUBFILES IMPORTING
+%\RequirePackage{standalone}
+%
+%% FOR TEMPLATE FILLER
+%\RequirePackage[english]{babel}
+%\RequirePackage{blindtext}% Filler Text
+%
+%
+%%=========================================================
+%% Resume Macros
+%%=========================================================
+%
+%%-----------------------------------------
+%% Resume Heading
+%% Usage:
+%% \resumeSubheading
+%%   {Title}
+%%   {Organization}
+%%   {Date}
+%%   {Location}
+%%-----------------------------------------
+%
+%%-----------------------------------------
+%% Subheading Fix (Single Line for #2 & #4)
+%%-----------------------------------------
+%\newcommand{\resumeSubheading}[4]{%
+%	\vspace{0.3em}%
+%	{\fontsize{11.2}{12}\selectfont\bfseries #1}\hfill{\small\textbf{#3}}\\%
+%	\if\relax\detokenize{#2}\relax\else\textit{#2}\fi%
+%	\if\relax\detokenize{#4}\relax\else\hfill\textit{#4}\fi%
+%	\par\vspace{0.2em}%
+%}
+%
+%%-----------------------------------------
+%% Resume Item List
+%%-----------------------------------------
+%\newcommand{\resumeItemListStart}{%
+%	\begin{zitemize}%
+%	}
+%	
+%	\newcommand{\resumeItemListEnd}{%
+%	\end{zitemize}%
+%}
+%
+%%-----------------------------------------
+%% Resume Item
+%%-----------------------------------------
+%\newcommand{\resumeItem}[1]{%
+%	\item #1%
+%}
+%
+%%-----------------------------------------
+%% Small Project Title
+%%-----------------------------------------
+%\newcommand{\resumeProjectHeading}[2]{%
+%	\vspace{0.3em}%
+%	\textbf{#1}\hfill{\small #2}\par%
+%	\vspace{0.15em}%
+%}
+%
+%%-----------------------------------------
+%% Technologies
+%%-----------------------------------------
+%\newcommand{\technologies}[1]{%
+%	\vspace{0.1em}%
+%	{\small\textbf{Technologies: }#1}\par%
+%	\vspace{0.15em}%
+%}
+%
+%%-----------------------------------------
+%% Spacing Macros
+%%-----------------------------------------
+%\newcommand{\resumespace}{\vspace{0.4em}}
+%\newcommand{\resumelittlespace}{\vspace{0.2em}}
+%
+%\newcommand{\skill}[2]{%
+%	\textbf{#1}\par
+%	#2\par
+%	\vspace{0.2em}%
+%}
+%
+%%\newcommand{\resumeSubheading}[4]{
+%%	\vspace{0.4em}
+%%	
+%%	{\fontsize{11.2}{12}\selectfont\bfseries #1}
+%%	%\textbf{\large #1}
+%%	\hfill
+%%	{\small\textbf{#3}}
+%%	
+%%	\if\relax\detokenize{#2}\relax
+%%	\else
+%%	\textit{#2}
+%%	\fi
+%%	
+%%	\if\relax\detokenize{#4}\relax
+%%	\else
+%%	\hfill
+%%	\textit{#4}
+%%	\fi
+%%	
+%%	\vspace{0.25em}
+%%}
+%%
+%%%-----------------------------------------
+%%% Resume Item List
+%%%-----------------------------------------
+%%
+%%\newcommand{\resumeItemListStart}{
+%%	\begin{zitemize}
+%%	}
+%%	
+%%	\newcommand{\resumeItemListEnd}{
+%%	\end{zitemize}
+%%}
+%%
+%%%-----------------------------------------
+%%% Resume Item
+%%%-----------------------------------------
+%%
+%%\newcommand{\resumeItem}[1]{
+%%	\item #1
+%%}
+%%
+%%%-----------------------------------------
+%%% Small Project Title
+%%%-----------------------------------------
+%%
+%%\newcommand{\resumeProjectHeading}[2]{
+%%	
+%%	\vspace{0.4em}
+%%	
+%%	\textbf{#1}
+%%	\hfill
+%%	{\small #2}
+%%	
+%%	\vspace{0.2em}
+%%}
+%%
+%%%-----------------------------------------
+%%% Technologies
+%%%-----------------------------------------
+%%
+%%\newcommand{\technologies}[1]{
+%%	
+%%	\vspace{0.15em}
+%%	
+%%	{\small
+%%		\textbf{Technologies: }
+%%		#1
+%%	}
+%%	
+%%	\vspace{0.2em}
+%%	
+%%}
+%%
+%%%-----------------------------------------
+%%% Small Space
+%%%-----------------------------------------
+%%
+%%\newcommand{\resumespace}{
+%%	\vspace{0.5em}
+%%}
+%%
+%%\newcommand{\resumelittlespace}{
+%%	\vspace{0.2em}
+%%}
+%%
+%%\newcommand{\skill}[2]{
+%%	
+%%	\textbf{#1}
+%%	
+%%	#2
+%%	
+%%	\vspace{0.2em}
+%%	
+%%}
